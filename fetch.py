@@ -13,13 +13,11 @@ def fetch():
 	for i in range(sheet.nrows - 1, 0, -1):
 		if sheet.cell_value(i, sheet.ncols - 1) not in user_db:
 			user_db[sheet.cell_value(i, sheet.ncols - 1)] = sheet.cell_value(i, sheet.ncols - 2)
-		elif sheet.cell_value(i, sheet.ncols - 1) in user_db:
-			break # lol efficiency
 
 	return user_db
 
 user_db = fetch()
-
+print(user_db)
 def verify_user(new_user_id):
 	global user_db
 	print(user_db)
