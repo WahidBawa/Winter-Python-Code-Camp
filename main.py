@@ -181,7 +181,7 @@ async def help(ctx, *, command=None):
         return
     await ctx.send(embed=embed)
 
-@client.command()
+@client.command(aliases=['r'])
 async def remindme(ctx, waitTime, *, reminder):
     global reminder_counter
     if "m" not in waitTime and "h" not in waitTime:
