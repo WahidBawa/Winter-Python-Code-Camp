@@ -1,4 +1,3 @@
-# CREDIT TO: https://dev.to/kalebu/how-to-detect-plagiarism-in-text-using-python-dpk
 import os
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
@@ -27,5 +26,5 @@ def check_plagiarism():
 	return plagiarism_results
 
 for data in check_plagiarism():
-	if data[2] >  0.79:
-		print(data)
+	# if data[2] >  0.79:
+	print(data)

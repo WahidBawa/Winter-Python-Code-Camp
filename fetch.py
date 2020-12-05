@@ -26,3 +26,8 @@ def verify_user(new_user_id):
 	user_db = fetch()
 	print(user_db)
 	return (True, user_db[new_user_id]) if new_user_id in user_db else (False, "")
+
+
+def check_user_name(discord_tag):
+	if str(discord_tag) in user_db.keys():
+		return user_db[discord_tag]
