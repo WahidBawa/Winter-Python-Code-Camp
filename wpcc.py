@@ -244,6 +244,40 @@ async def searchify(ctx, *, searchTerm):
     link += searchTerm.replace(" ", "+")
     await ctx.send(link)
 
+@client.command(aliases=["rm"])
+@commands.has_role("ADMIN")
+async def release_marks(ctx, *, assignment):
+    global grades
+    print(grades)
+    await ctx.send(f"Sending out grades for {assignment}")
+    os.system(os.getenv('FETCH_MARKS'))
+    wb = xlrd.open_workbook("grades.xlsx")
+    sheet = wb.sheet_by_index(0)
+    for i in range(1, sheet.nrows):
+        for j in range(4, sheet.ncols):
+            print("Is correct assignment:", sheet.cell_value(0, j) == assignment)
+            print("Is different:", sheet.cell_value(i, j) != grades[sheet.cell_value(i, 3)][j - 4])
+            if sheet.cell_value(0, j) == assignment and sheet.cell_value(i, j) != grades[sheet.cell_value(i, 3)][j - 4] and len(str(sheet.cell_value(i, j))) != 0:
+                grades[sheet.cell_value(i, 3)][j - 4] = sheet.cell_value(i, j)
+                await client.guilds[0].get_member_named(sheet.cell_value(i, 3)).send(f"Hi {check_user_name(sheet.cell_value(i, 3))}! Here are your `{sheet.cell_value(0, j)}` grades.\n`{sheet.cell_value(i, j)}`")
+
+
+
+
+
+# async def update_grades():
+#     while not client.is_closed():
+#         await asyncio.sleep(10)
+#         global grades
+#         os.system(os.getenv('FETCH_MARKS'))
+#         wb = xlrd.open_workbook("grades.xlsx")
+#         sheet = wb.sheet_by_index(0)
+#         for i in range(1, sheet.nrows):
+#             for j in range(4, sheet.ncols):
+#                 if sheet.cell_value(i, j) != grades[sheet.cell_value(i, 3)][j - 4] and len(sheet.cell_value(i, j)) != 0:
+#                     grades[sheet.cell_value(i, 3)][j - 4] = sheet.cell_value(i, j)
+#                     await client.guilds[0].get_member_named(sheet.cell_value(i, 3)).send(f"Hi {check_user_name(sheet.cell_value(i, 3))}! Here are your `{sheet.cell_value(0, j)}` grades.\n`{sheet.cell_value(i, j)}`")
+
 async def checkReminders():
     while not client.is_closed():
         await asyncio.sleep(1)
@@ -257,4 +291,5 @@ async def checkReminders():
             reminder_dict.pop(i)
 
 client.loop.create_task(checkReminders())
+# client.loop.create_task(update_grades())
 client.run(token)
