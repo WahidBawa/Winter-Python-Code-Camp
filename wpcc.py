@@ -79,7 +79,7 @@ async def on_message(message):
                 os.system(f"touch ./submissions/{name}/submission_history.txt")
             os.system(f"wget {message.attachments[0].url}")
             os.system(f"mv ./{filename} ./submissions/{name}/")
-            time_string = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+            time_string = datetime.now().astimezone(tz=None).strftime("%d/%m/%Y %H:%M:%S")
             time_file = open(f"./submissions/{name}/submission_history.txt", "a")
             time_file.write(f"{filename}: {time_string}\n")
             time_file.close()
