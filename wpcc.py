@@ -255,11 +255,11 @@ async def release_marks(ctx, *, assignment):
     sheet = wb.sheet_by_index(0)
     for i in range(1, sheet.nrows):
         for j in range(2, sheet.ncols):
-            print("Is correct assignment:", sheet.cell_value(0, j) == assignment)
-            print("Is different:", sheet.cell_value(i, j) != grades[sheet.cell_value(i, 1)][j - 2])
+           #print("Is correct assignment:", sheet.cell_value(0, j) == assignment)
+           #print("Is different:", sheet.cell_value(i, j) != grades[sheet.cell_value(i, 1)][j - 2])
             if sheet.cell_value(0, j) == assignment and sheet.cell_value(i, j) != grades[sheet.cell_value(i, 1)][j - 2] and len(str(sheet.cell_value(i, j))) != 0:
                 grades[sheet.cell_value(i, 1)][j - 2] = sheet.cell_value(i, j)
-                await client.guilds[0].get_member_named(sheet.cell_value(i, 1)).send(f"Hi {check_user_name(sheet.cell_value(i, 0))}! Here are your `{sheet.cell_value(0, j)}` grades.\n`{sheet.cell_value(i, j)}`")
+                await client.guilds[0].get_member_named(sheet.cell_value(i, 1)).send(f"Hi {sheet.cell_value(i, 0)}! Here are your `{sheet.cell_value(0, j)}` grades.\n`{sheet.cell_value(i, j)}`")
 
 
 
