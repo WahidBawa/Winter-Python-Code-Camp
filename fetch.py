@@ -36,8 +36,10 @@ def download_grades():
 	wb = xlrd.open_workbook("grades.xlsx")
 	sheet = wb.sheet_by_index(0)
 	for i in range(1, sheet.nrows):
-		grades[sheet.cell_value(i, 3)] = []
-		for j in range(4, sheet.ncols):
-			grades[sheet.cell_value(i, 3)].append(sheet.cell_value(i, j))
+		print(sheet.cell_value(i, 1))
+		grades[sheet.cell_value(i, 1)] = []
+		for j in range(2, sheet.ncols):
+			grades[sheet.cell_value(i, 1)].append(sheet.cell_value(i, j))
 
 download_grades()
+print(grades)
