@@ -291,8 +291,4 @@ async def checkReminders():
             reminder_dict.pop(i)
 
 client.loop.create_task(checkReminders())
-<<<<<<< HEAD
-=======
-# client.loop.create_task(update_grades())
->>>>>>> 8617427f4f24c14165b60f8a2726d6ef0898af20
 client.run(token)
