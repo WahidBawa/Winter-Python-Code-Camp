@@ -26,8 +26,10 @@ def verify_user(new_user_id):
 
 
 def check_user_name(discord_tag):
-	if str(discord_tag) in user_db.keys():
-		return user_db[discord_tag]
+	global user_db
+	if str(discord_tag) not in user_db.keys():
+		user_db = fetch()
+	return user_db[discord_tag]
 
 grades = {}
 def download_grades():
