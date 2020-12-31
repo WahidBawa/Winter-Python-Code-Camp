@@ -293,8 +293,8 @@ async def emergency_release(ctx, *, assignment):
                 grades[sheet.cell_value(i, 1)][j - 2] = sheet.cell_value(i, j)
                 try:
                     await client.guilds[0].get_member_named(sheet.cell_value(i, 1)).send(f"Hi {sheet.cell_value(i, 0)}! Here are your `{sheet.cell_value(0, j)}` grades.\n`{sheet.cell_value(i, j)}`")
-                except:
-                    print(f"There is an error for the student: {sheet.cell_value(i, 1)} for {assignment})")
+                except Exception as e:
+                    print(f"There is an error for the student: {sheet.cell_value(i, 2)} for {assignment}) with error: {e}")
             # print(sheet.cell_value(i, 1))
             # print(sheet.cell_value(i, 1) in grades.keys())
 
